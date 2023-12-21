@@ -184,7 +184,6 @@
                 "displayName":  "[variables('AzuremonitorlogsConnectionName')]",
                 "customParameterValues":  {
                 },
-                "parameterValueType":  "Alternative",
                 "api":  {
                     "id":  "[concat('/subscriptions/', subscription().subscriptionId, '/providers/Microsoft.Web/locations/', resourceGroup().location, '/managedApis/Azuremonitorlogs')]"
                 }
