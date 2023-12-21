@@ -100,8 +100,8 @@
                                 "method":  "post",
                                 "path":  "/visualizeQuery",
                                 "queries":  {
-                                    "resourcegroups":  "Sharjeel_Resource_Group_1",
-                                    "resourcename":  "Microsoft-Sentinel-Workspace",
+                                    "resourcegroups":  "@parameters('ResourceGroup')",
+                                    "resourcename":  "@parameters('ResourceName')",
                                     "resourcetype":  "Log Analytics Workspace",
                                     "subscriptions":  "a77fb148-4a5b-485d-8153-73b365131df1",
                                     "timerange":  "Set in query",
