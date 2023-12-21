@@ -25,6 +25,24 @@
         "PlaybookName":  {
             "defaultValue":  "EmailShiftNotification",
             "type":  "string"
+        },
+        "EmailAddress":  {
+            "type":  "string",
+            "metadata":  {
+                "description":  "Enter value for EmailAddress"
+            }
+        },
+        "ResourceGroup":  {
+            "type":  "string",
+            "metadata":  {
+                "description":  "Enter value for ResourceGroup"
+            }
+        },
+        "ResourceName":  {
+            "type":  "string",
+            "metadata":  {
+                "description":  "Enter value for ResourceName"
+            }
         }
     },
     "variables":  {
