@@ -5,8 +5,6 @@
         "title":  "",
         "description":  "",
         "prerequisites":  "",
-        "postDeployment":  [
-        ],
         "prerequisitesDeployTemplateFile":  "",
         "lastUpdateTime":  "",
         "entities":  [
