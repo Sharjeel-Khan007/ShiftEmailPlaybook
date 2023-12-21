@@ -110,7 +110,7 @@
                                 "body":  "SecurityIncident\n| where TimeGenerated \u003e ago(8h)\n| extend IncidentTime = todatetime(LastModifiedTime)\n| summarize LatestIncident = arg_max(IncidentTime, *) by IncidentNumber \n| project-away LastModifiedTime\n| project TimeGenerated, IncidentNumber, Title, Severity, Status, CreatedTime, ClosedTime, Owner.assignedTo, IncidentHandlingTime = LatestIncident - CreatedTime\n| extend SLAStatus = \n    case(\n        Severity == \"High\" and IncidentHandlingTime \u003c 2h, \"Within SLA\",\n        Severity == \"Medium\" and IncidentHandlingTime \u003c 6h, \"Within SLA\",\n        Severity == \"Low\" and IncidentHandlingTime \u003c 12h, \"Within SLA\",\n        Severity == \"Informational\" and IncidentHandlingTime \u003c 24h, \"Within SLA\",\n        \"Outside SLA\"\n    )",
                                 "host":  {
                                     "connection":  {
-                                        "name":  "@parameters('$connections')['azuremonitorlogs']['connectionId']"
+                                        "name":  "@parameters('$connections')['azuremonitorlogs_1']['connectionId']"
                                     }
                                 },
                                 "method":  "post",
@@ -152,23 +152,18 @@
                     "outputs":  {
                     }
                 },
-                "parameters":  {
+               "parameters":  {
                     "$connections":  {
                         "value":  {
-                            "azuremonitorlogs":  {
-                                "connectionId":  "[resourceId('Microsoft.Web/connections', variables('AzuremonitorlogsConnectionName'))]",
-                                "connectionName":  "[variables('AzuremonitorlogsConnectionName')]",
-                                "id":  "[concat('/subscriptions/', subscription().subscriptionId, '/providers/Microsoft.Web/locations/', resourceGroup().location, '/managedApis/Azuremonitorlogs')]",
-                                "connectionProperties":  {
-                                    "authentication":  {
-                                        "type":  "ManagedServiceIdentity"
-                                    }
-                                }
+                            "azuremonitorlogs_1":  {
+                                "connectionId":  "[resourceId('Microsoft.Web/connections', variables('azuremonitorlogsConnectionName'))]",
+                                "connectionName":  "[variables('azuremonitorlogsConnectionName')]",
+                                "id":  "[concat('/subscriptions/', subscription().subscriptionId, '/providers/Microsoft.Web/locations/', resourceGroup().location, '/managedApis/azuremonitorlogs')]"
                             },
-                            "office365":  {
-                                "connectionId":  "[resourceId('Microsoft.Web/connections', variables('Office365ConnectionName'))]",
-                                "connectionName":  "[variables('Office365ConnectionName')]",
-                                "id":  "[concat('/subscriptions/', subscription().subscriptionId, '/providers/Microsoft.Web/locations/', resourceGroup().location, '/managedApis/Office365')]"
+                            "office365_1":  {
+                                "connectionId":  "[resourceId('Microsoft.Web/connections', variables('office365ConnectionName'))]",
+                                "connectionName":  "[variables('office365ConnectionName')]",
+                                "id":  "[concat('/subscriptions/', subscription().subscriptionId, '/providers/Microsoft.Web/locations/', resourceGroup().location, '/managedApis/office365')]"
                             }
                         }
                     }
@@ -186,22 +181,22 @@
             },
             "apiVersion":  "2017-07-01",
             "dependsOn":  [
-                "[resourceId('Microsoft.Web/connections', variables('AzuremonitorlogsConnectionName'))]",
-                "[resourceId('Microsoft.Web/connections', variables('Office365ConnectionName'))]"
+                "[resourceId('Microsoft.Web/connections', variables('azuremonitorlogsConnectionName'))]",
+                "[resourceId('Microsoft.Web/connections', variables('office365ConnectionName'))]"
             ]
         },
         {
             "type":  "Microsoft.Web/connections",
             "apiVersion":  "2016-06-01",
-            "name":  "[variables('AzuremonitorlogsConnectionName')]",
+            "name":  "[variables('azuremonitorlogsConnectionName')]",
             "location":  "[resourceGroup().location]",
             "kind":  "V1",
             "properties":  {
-                "displayName":  "[variables('AzuremonitorlogsConnectionName')]",
+                "displayName":  "[variables('azuremonitorlogsConnectionName')]",
                 "customParameterValues":  {
                 },
                 "api":  {
-                    "id":  "[concat('/subscriptions/', subscription().subscriptionId, '/providers/Microsoft.Web/locations/', resourceGroup().location, '/managedApis/Azuremonitorlogs')]"
+                    "id":  "[concat('/subscriptions/', subscription().subscriptionId, '/providers/Microsoft.Web/locations/', resourceGroup().location, '/managedApis/azuremonitorlogs')]"
                 }
             }
         },
